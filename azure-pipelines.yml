@@ -9,19 +9,15 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-variables:
-  imageName: 'pipelines-javascript-docker'
-
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- task: DockerInstaller@0
+- task: PythonScript@0
   inputs:
-    dockerVersion: '17.09.0-ce'
-
-- task: Docker@2
-  inputs:
-    repository: 'OllieTestContainer'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    scriptSource: 'inline'
+    script: |
+      import os
+      print(f'Environment variable MY_VAR: {os.getenv("MY_VAR")}')
+  env:
+    MY_VAR: 'Hello, World!'
