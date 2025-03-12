@@ -19,5 +19,6 @@ steps:
     script: |
       import os
       print(f'Environment variable MY_VAR: {os.getenv("MY_VAR")}')
+      printf(f'Current working directory: {os.getcwd()})
   env:
     MY_VAR: 'Hello, World!'
